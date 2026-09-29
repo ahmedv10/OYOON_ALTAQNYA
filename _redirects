@@ -1,0 +1,4 @@
+# Cloudflare Pages / Netlify redirects
+# Short link to the Cybersecurity Assessment portal
+/assessment    https://cta.techeyes.ly    302
+/assessment/   https://cta.techeyes.ly    302
