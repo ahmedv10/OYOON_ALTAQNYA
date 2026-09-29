@@ -1,4 +1,4 @@
-/* Techeyes — site behaviour. No dependencies. */
+/* Oyoon Al-Taqniya — site behaviour. No dependencies. */
 (() => {
   'use strict';
 
@@ -178,91 +178,44 @@
     });
   });
 
-  /* -------------------------------------- hero: the eyes that keep watch
-     The ring of eyes from the logo turns slowly while every pupil looks
-     toward the visitor's pointer (or wanders when there is none). */
-  const ring = document.querySelector('[data-eye-ring]');
-  if (ring && !reduceMotion) {
-    const svg = ring.ownerSVGElement;
-    const pupils = [...ring.querySelectorAll('.pupil')].map((el) => ({
-      el,
-      x: Number(el.getAttribute('cx')),
-      y: Number(el.getAttribute('cy')),
-      dx: 0,
-      dy: 0,
-    }));
-    const MAX_OFFSET = 1.1; // viewBox units the pupil may travel inside its eye
-    const DEG_PER_MS = 360 / 100000; // one revolution every 100 s
-    let pointer = null;
-    let pointerAt = 0;
-    let angle = 0;
-    let lastTime = 0;
-    let running = false;
+  /* ------------------------------------------ hero: the mark tilts in 3D
+     Eased toward the pointer; only the element's own transform changes, so it stays on the compositor. */
+  const tilt = document.querySelector('[data-tilt]');
+  if (tilt && !reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const MAX_X = 10; // degrees
+    const MAX_Y = 14;
+    let target = { x: 0, y: 0 };
+    const current = { x: 0, y: 0 };
+    let frame = 0;
+
+    const render = () => {
+      current.x += (target.x - current.x) * 0.12;
+      current.y += (target.y - current.y) * 0.12;
+      // set the transform itself (not inherited custom properties) so the SVG subtree never restyles
+      tilt.style.transform = `perspective(900px) rotateX(${current.x.toFixed(2)}deg) rotateY(${current.y.toFixed(2)}deg)`;
+      const settled = Math.abs(target.x - current.x) < 0.02 && Math.abs(target.y - current.y) < 0.02;
+      frame = settled ? 0 : window.requestAnimationFrame(render);
+    };
 
     window.addEventListener(
       'pointermove',
       (event) => {
-        pointer = { x: event.clientX, y: event.clientY };
-        pointerAt = performance.now();
+        const box = tilt.getBoundingClientRect();
+        if (box.bottom < 0 || box.top > window.innerHeight) return; // hero off-screen
+        const nx = (event.clientX - (box.left + box.width / 2)) / (window.innerWidth / 2);
+        const ny = (event.clientY - (box.top + box.height / 2)) / (window.innerHeight / 2);
+        target = {
+          x: Math.max(-1, Math.min(1, ny)) * -MAX_X,
+          y: Math.max(-1, Math.min(1, nx)) * MAX_Y,
+        };
+        if (!frame) frame = window.requestAnimationFrame(render);
       },
       { passive: true }
     );
     document.documentElement.addEventListener('pointerleave', () => {
-      pointer = null;
+      target = { x: 0, y: 0 };
+      if (!frame) frame = window.requestAnimationFrame(render);
     });
-
-    const frame = (now) => {
-      if (!running) return;
-      const dt = Math.min(64, now - (lastTime || now));
-      lastTime = now;
-      angle = (angle + dt * DEG_PER_MS) % 360;
-      ring.setAttribute('transform', `rotate(${angle.toFixed(3)} 50 50)`);
-
-      const box = svg.getBoundingClientRect();
-      const scale = box.width / 100;
-      let tx;
-      let ty;
-      if (pointer && now - pointerAt < 3500) {
-        tx = (pointer.x - box.left) / scale;
-        ty = (pointer.y - box.top) / scale;
-      } else {
-        const s = now / 2600; // idle: glance around slowly
-        tx = 50 + Math.cos(s) * 80;
-        ty = 50 + Math.sin(s * 0.7) * 55;
-      }
-
-      const rad = (angle * Math.PI) / 180;
-      const cos = Math.cos(rad);
-      const sin = Math.sin(rad);
-      pupils.forEach((p) => {
-        // where this pupil currently is on screen (ring is rotated about 50,50)
-        const px = 50 + (p.x - 50) * cos - (p.y - 50) * sin;
-        const py = 50 + (p.x - 50) * sin + (p.y - 50) * cos;
-        let vx = tx - px;
-        let vy = ty - py;
-        const dist = Math.hypot(vx, vy) || 1;
-        const k = (MAX_OFFSET * Math.min(1, dist / 24)) / dist;
-        vx *= k;
-        vy *= k;
-        // back into the ring's rotated frame
-        const lx = vx * cos + vy * sin;
-        const ly = -vx * sin + vy * cos;
-        p.dx += (lx - p.dx) * 0.14;
-        p.dy += (ly - p.dy) * 0.14;
-        p.el.setAttribute('transform', `translate(${p.dx.toFixed(3)} ${p.dy.toFixed(3)})`);
-      });
-      window.requestAnimationFrame(frame);
-    };
-
-    new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !running) {
-        running = true;
-        lastTime = 0;
-        window.requestAnimationFrame(frame);
-      } else if (!entry.isIntersecting) {
-        running = false;
-      }
-    }).observe(svg);
   }
 
   /* ------------------------------------------- assessment coverage scanner */

@@ -1,21 +1,22 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/img/logo/techeyes-logo-horizontal-white.svg">
-    <img src="assets/img/logo/techeyes-logo-horizontal.svg" alt="Techeyes — IT &amp; Telecommunications" width="360">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/img/logo/oyoon-logo-horizontal-white.png">
+    <img src="assets/img/logo/oyoon-logo-horizontal.png" alt="عيون التقنية — Oyoon Al-Taqniya" width="380">
   </picture>
 </p>
 
-<h3 align="center">Techeyes · عيون التقنية (Oyoon Altaqnya)</h3>
-<p align="center">Website for Techeyes IT &amp; Telecommunications, Tripoli, Libya</p>
+<h3 align="center">Oyoon Al-Taqniya · عيون التقنية للاتصالات وتقنية المعلومات</h3>
+<p align="center">Website for Oyoon Al-Taqniya Telecommunications &amp; IT (techeyes.ly), Tripoli, Libya</p>
 
-![Techeyes website — English desktop and Arabic mobile](docs/preview.jpg)
+![Oyoon Al-Taqniya website — English desktop and Arabic mobile](docs/preview.jpg)
 
-A premium, bilingual (English / العربية) single-page site built around the company's own
-eye-ring logo, with a prominent **Cybersecurity Assessment** call to action that sends visitors
-to **https://cta.techeyes.ly**.
+A premium, bilingual (English / العربية) single-page site built around the company's logo,
+with a prominent **Cybersecurity Assessment** call to action that sends visitors to
+**https://cta.techeyes.ly**.
 
-- **Brand:** the original Techeyes logo, vectorized to crisp SVG (`assets/img/logo/`). In the hero,
-  the ring of eyes turns slowly and every pupil follows the visitor's pointer.
+- **Brand:** the Oyoon Al-Taqniya logo in the header, hero, about card, closing banner and footer
+  (the footer shows the complete stacked logo). The site colours are sampled from it. In the hero
+  the mark floats and tilts in 3D toward the visitor's pointer.
 - **Cybersecurity Assessment:** in the header, the hero, a dedicated assessment section, the
   cybersecurity service card, the closing banner and the footer. `techeyes.ly/assessment` is also a
   short link that redirects to the portal.
@@ -40,7 +41,7 @@ assets/
   js/i18n.js               Arabic translations (keys match data-i18n in index.html)
   js/main.js               Menu, language switch, reveal animations, watching eyes, form
   fonts/                   Montserrat, Inter, IBM Plex Sans Arabic (SIL OFL, see licenses/)
-  img/logo/                Logo SVGs: emblem, stacked and horizontal lockups, light/dark
+  img/logo/                Logo files (see "Logo files" below)
   img/                     Favicons, app icons, social share image (og-image.png)
 _headers, _redirects       Cloudflare Pages / Netlify config
 .htaccess                  Same config for Apache / LiteSpeed (cPanel) hosting
@@ -73,8 +74,24 @@ python3 -m http.server 8080     # or: npx serve .
 - **Contact form:** it opens the visitor's email app with the message pre-filled (`mailto:`), so no
   backend is needed. To collect submissions on a server instead, point the form at a form service
   or a Cloudflare Worker, and add that origin to the CSP `connect-src` / `form-action`.
-- **Brand colors:** the tokens at the top of `styles.css`. `--brand` (`#1E4CCF`) is sampled from the
-  original logo.
+- **Brand colors:** the tokens at the top of `styles.css`, sampled from the logo: violet `#6A27FA`,
+  royal blue `#0165F9` and sky `#2FB6F8`.
+
+## Logo files
+
+`assets/img/logo/` was produced from the supplied logo artwork:
+
+| File | Use |
+| --- | --- |
+| `oyoon-logo.png` / `oyoon-logo-white.png` | Full stacked logo (as supplied): navy text for light backgrounds, white text for dark |
+| `oyoon-logo-horizontal.png` / `-white.png` | Mark beside the name, for documents and headers |
+| `oyoon-mark.png` | The mark alone, transparent background |
+| `oyoon-wordmark.svg` / `-white.svg` | Vector lettering: عيون التقنية, rule, OYOON AL-TAQNIYA |
+| `oyoon-mark-fill.jpg` | Texture the website clips with a vector outline so the mark stays sharp at large sizes |
+
+The lettering is traced to vector. The mark keeps the original's shading, taken from the
+1080 × 810 source image. If you have the logo as an SVG, AI or EPS file, send it over and
+the mark can be swapped for a pure vector version.
 
 ## Deploying
 

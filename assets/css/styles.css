@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Techeyes — عيون التقنية · IT & Telecommunications
+   Oyoon Al-Taqniya — عيون التقنية للاتصالات وتقنية المعلومات
    Premium single-page site. Dark UI, bilingual (EN / AR, RTL-aware).
    ========================================================================== */
 
@@ -72,17 +72,19 @@
   --text-2: #aab4d4;
   --text-3: #8490b3;
 
-  /* brand — #1E4CCF is sampled from the original Techeyes logo */
-  --brand: #1e4ccf;
-  --brand-500: #2f5bf0;
-  --brand-400: #4a78ff;
-  --brand-300: #86a8ff;
-  --cyan: #3fd8f5;
-  --cyan-300: #8be9fb;
+  /* brand — sampled from the Oyoon Al-Taqniya logo (violet → royal blue → sky) */
+  --brand: #0165f9;
+  --brand-500: #1f6bff;
+  --brand-400: #4a7dff;
+  --brand-300: #8fa6ff;
+  --violet: #6a27fa;
+  --violet-300: #a78bfa;
+  --cyan: #2fbef8;
+  --cyan-300: #8ddcfb;
   --green: #34d399;
 
-  --grad-brand: linear-gradient(120deg, #a9c1ff 0%, #5b8cff 45%, #3fd8f5 100%);
-  --grad-cta: linear-gradient(135deg, #6b98ff 0%, #3fd8f5 100%);
+  --grad-brand: linear-gradient(120deg, #b69cff 0%, #7a8dff 30%, #3f8dff 62%, #38c6f8 100%);
+  --grad-cta: linear-gradient(120deg, #a08cff 0%, #5ea2ff 48%, #36c5f7 100%);
 
   --radius-sm: 10px;
   --radius: 16px;
@@ -99,7 +101,6 @@
 
   --font-display: "Montserrat", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-brand: "Montserrat", "Inter", system-ui, sans-serif;
   --tracking-display: -0.03em;
   --tracking-caps: 0.14em;
 }
@@ -395,7 +396,7 @@ html[lang="ar"] .eyebrow {
   overflow: hidden;
   color: #03122b;
   background: var(--grad-cta);
-  box-shadow: inset 0 0 0 1px rgba(190, 240, 255, 0.35), 0 10px 30px -12px rgba(63, 216, 245, 0.65), 0 6px 22px -10px rgba(74, 120, 255, 0.8);
+  box-shadow: inset 0 0 0 1px rgba(190, 240, 255, 0.35), 0 10px 30px -12px rgba(47, 190, 248, 0.65), 0 6px 22px -10px rgba(74, 120, 255, 0.8);
 }
 
 .btn--primary::after {
@@ -410,7 +411,7 @@ html[lang="ar"] .eyebrow {
 
 .btn--primary:hover {
   translate: 0 -1px;
-  box-shadow: inset 0 0 0 1px rgba(190, 240, 255, 0.5), 0 16px 40px -12px rgba(63, 216, 245, 0.8), 0 10px 30px -10px rgba(74, 120, 255, 0.9);
+  box-shadow: inset 0 0 0 1px rgba(190, 240, 255, 0.5), 0 16px 40px -12px rgba(47, 190, 248, 0.8), 0 10px 30px -10px rgba(74, 120, 255, 0.9);
 }
 
 .btn--primary:hover::after {
@@ -550,48 +551,34 @@ a:hover > .i-arrow,
   border-radius: 12px;
 }
 
-.brand__emblem {
-  width: 40px;
+.brand__mark {
+  width: 39px;
   height: 40px;
-  fill: url(#g-emblem);
-  filter: drop-shadow(0 0 10px rgba(74, 120, 255, 0.35));
+  flex: none;
+  filter: drop-shadow(0 0 12px rgba(1, 101, 249, 0.35));
 }
 
-.brand__text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
+.brand__wordmark {
+  width: 135px;
+  height: 36px;
+  flex: none;
 }
 
-.brand__name {
-  font-family: var(--font-brand);
-  font-size: 1.3125rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #fff;
+/* logo lettering colours — the logo symbols pick these up through <use> */
+.oy-name {
+  fill: var(--oy-name, #fff);
 }
 
-.brand__tag {
-  margin-top: 6px;
-  font-family: var(--font-brand);
-  font-size: 0.625rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  color: var(--text-3);
+.oy-tagline {
+  fill: var(--oy-tagline, #c3cbe6);
 }
 
-html[lang="ar"] .brand__name {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: 0;
+.oy-rule {
+  fill: var(--oy-rule, #2f7bff);
 }
 
-html[lang="ar"] .brand__tag {
-  margin-top: 4px;
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  letter-spacing: 0;
+.oy-latin {
+  fill: var(--oy-latin, #dfe5fa);
 }
 
 .nav {
@@ -791,10 +778,6 @@ html[lang="ar"] .brand__tag {
 }
 
 @media (max-width: 560px) {
-  .brand__tag {
-    display: none;
-  }
-
   .header__cta .label-long {
     display: none;
   }
@@ -820,9 +803,23 @@ html[lang="ar"] .brand__tag {
   .header__cta .icon {
     display: none;
   }
+
+  .brand {
+    gap: 9px;
+  }
+
+  .brand__mark {
+    width: 35px;
+    height: 36px;
+  }
+
+  .brand__wordmark {
+    width: 112px;
+    height: 30px;
+  }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 374px) {
   .header__inner {
     gap: 10px;
   }
@@ -835,13 +832,14 @@ html[lang="ar"] .brand__tag {
     gap: 8px;
   }
 
-  .brand__emblem {
-    width: 32px;
+  .brand__mark {
+    width: 31px;
     height: 32px;
   }
 
-  .brand__name {
-    font-size: 1.125rem;
+  .brand__wordmark {
+    width: 98px;
+    height: 26px;
   }
 
   .header__cta {
@@ -851,8 +849,14 @@ html[lang="ar"] .brand__tag {
 }
 
 @media (max-width: 340px) {
-  .brand__name {
-    font-size: 1.0625rem;
+  .brand__mark {
+    width: 29px;
+    height: 30px;
+  }
+
+  .brand__wordmark {
+    width: 83px;
+    height: 22px;
   }
 }
 
@@ -896,7 +900,7 @@ html[lang="ar"] .brand__tag {
   inset-inline-end: -220px;
   width: 980px;
   height: 980px;
-  background: radial-gradient(closest-side, rgba(47, 91, 240, 0.42), rgba(47, 91, 240, 0.1) 50%, transparent 72%);
+  background: radial-gradient(closest-side, rgba(1, 101, 249, 0.36), rgba(106, 39, 250, 0.12) 52%, transparent 72%);
 }
 
 .hero__glow--b {
@@ -904,7 +908,7 @@ html[lang="ar"] .brand__tag {
   inset-inline-start: -260px;
   width: 760px;
   height: 760px;
-  background: radial-gradient(closest-side, rgba(63, 216, 245, 0.13), transparent 70%);
+  background: radial-gradient(closest-side, rgba(106, 39, 250, 0.16), transparent 70%);
 }
 
 .hero__inner {
@@ -1022,7 +1026,7 @@ html[lang="ar"] .hero__title {
   color: var(--text-3);
 }
 
-/* the "watch": the Techeyes eye-ring, keeping an eye on things */
+/* the "watch": the logo mark at the centre of orbiting rings and a radar sweep */
 .hero__visual {
   position: relative;
 }
@@ -1038,7 +1042,7 @@ html[lang="ar"] .hero__title {
   position: absolute;
   inset: 6%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(74, 120, 255, 0.38), rgba(74, 120, 255, 0.08) 52%, transparent 70%);
+  background: radial-gradient(circle, rgba(1, 101, 249, 0.3), rgba(106, 39, 250, 0.1) 52%, transparent 70%);
   animation: te-breathe 7s ease-in-out infinite alternate;
 }
 
@@ -1084,7 +1088,7 @@ html[lang="ar"] .hero__title {
   height: 8px;
   border-radius: 50%;
   background: var(--cyan);
-  box-shadow: 0 0 14px 3px rgba(63, 216, 245, 0.65);
+  box-shadow: 0 0 14px 3px rgba(47, 190, 248, 0.65);
 }
 
 .watch__sat--b {
@@ -1104,50 +1108,48 @@ html[lang="ar"] .hero__title {
   height: 7px;
 }
 
-.watch__emblem {
+/* the logo mark: floats gently and tilts toward the pointer (transform set by main.js) */
+.watch__mark {
   position: absolute;
-  inset: 17%;
-  width: 66%;
-  height: 66%;
-  overflow: visible;
-  fill: url(#g-emblem);
+  inset: 21%;
+  transform: perspective(900px);
+  will-change: transform;
 }
 
-/* static glow behind the ring: painted once, unlike a filter on the animated SVG */
+.watch__mark svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  animation: te-hover 9s ease-in-out infinite;
+}
+
+@keyframes te-hover {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+/* static glow behind the mark: painted once, never re-rasterised per frame */
 .watch__glow {
   position: absolute;
-  inset: 14%;
+  inset: 20%;
   border-radius: 50%;
-  background: radial-gradient(closest-side, transparent 60%, rgba(74, 120, 255, 0.5) 78%, rgba(74, 120, 255, 0.16) 92%, transparent 100%);
-  filter: blur(14px);
+  background: radial-gradient(closest-side, rgba(1, 101, 249, 0.42), rgba(106, 39, 250, 0.2) 58%, transparent 100%);
+  filter: blur(18px);
 }
 
 .watch__radar {
   position: absolute;
-  inset: 29%;
+  inset: 7.5%;
   border-radius: 50%;
-  background: conic-gradient(from 0deg, transparent 0deg 290deg, rgba(63, 216, 245, 0.05) 300deg, rgba(63, 216, 245, 0.42) 359deg, transparent 360deg);
-  -webkit-mask-image: radial-gradient(circle, #000 52%, transparent 71%);
-  mask-image: radial-gradient(circle, #000 52%, transparent 71%);
-  animation: te-spin 4.8s linear infinite;
-}
-
-.watch__core {
-  position: absolute;
-  inset: 42%;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(140, 165, 255, 0.28);
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #13204d, #080d22 70%);
-  box-shadow: 0 0 44px rgba(74, 120, 255, 0.45), inset 0 0 18px rgba(74, 120, 255, 0.25);
-  color: var(--cyan-300);
-}
-
-.watch__core .icon {
-  width: 46%;
-  height: 46%;
-  stroke-width: 1.6;
+  background: conic-gradient(from 0deg, transparent 0deg 280deg, rgba(47, 190, 248, 0.04) 295deg, rgba(47, 190, 248, 0.26) 359deg, transparent 360deg);
+  -webkit-mask-image: radial-gradient(circle, #000 55%, transparent 71%);
+  mask-image: radial-gradient(circle, #000 55%, transparent 71%);
+  animation: te-spin 6s linear infinite;
 }
 
 .status {
@@ -1209,26 +1211,28 @@ html[lang="ar"] .hero__title {
   color: var(--text-3);
 }
 
+/* chips sit in the empty corners around the mark (its pixel squares are top-right).
+   Physical left/right on purpose: the logo never mirrors in RTL, so neither do these. */
 .status--1 {
-  top: 9%;
-  inset-inline-start: -2%;
+  top: 14%;
+  left: -4%;
 }
 
 .status--2 {
-  top: 34%;
-  inset-inline-end: -5%;
+  top: 4%;
+  right: 2%;
   animation-delay: -2s;
 }
 
 .status--3 {
-  bottom: 18%;
-  inset-inline-start: -6%;
+  bottom: 16%;
+  left: -6%;
   animation-delay: -4s;
 }
 
 .status--4 {
   bottom: 3%;
-  inset-inline-end: 6%;
+  right: 6%;
   animation-delay: -6s;
 }
 
@@ -1292,7 +1296,7 @@ html[lang="ar"] .hero__title {
 
   .status--1 {
     top: 2%;
-    inset-inline-start: 0;
+    left: 0;
   }
 
   .status--2,
@@ -1302,7 +1306,7 @@ html[lang="ar"] .hero__title {
 
   .status--4 {
     bottom: 0;
-    inset-inline-end: 0;
+    right: 0;
   }
 }
 
@@ -1366,7 +1370,7 @@ html[lang="ar"] .marquee__label {
   height: 6px;
   border-radius: 50%;
   background: var(--grad-cta);
-  box-shadow: 0 0 10px rgba(63, 216, 245, 0.6);
+  box-shadow: 0 0 10px rgba(47, 190, 248, 0.6);
 }
 
 @keyframes te-marquee {
@@ -1408,7 +1412,7 @@ html[lang="ar"] .marquee__label {
   border-radius: var(--radius-xl);
   background:
     radial-gradient(110% 120% at 0% 0%, rgba(47, 91, 240, 0.24), transparent 55%),
-    radial-gradient(80% 90% at 100% 100%, rgba(63, 216, 245, 0.12), transparent 60%),
+    radial-gradient(80% 90% at 100% 100%, rgba(47, 190, 248, 0.12), transparent 60%),
     linear-gradient(180deg, #0d1535, #080c1d);
   overflow: hidden;
 }
@@ -1420,7 +1424,7 @@ html[lang="ar"] .marquee__label {
   z-index: -1;
   padding: 1px;
   border-radius: inherit;
-  background: conic-gradient(from var(--te-angle), transparent 0% 62%, rgba(63, 216, 245, 0.85) 80%, rgba(134, 168, 255, 0.6) 88%, transparent 100%);
+  background: conic-gradient(from var(--te-angle), transparent 0% 62%, rgba(47, 190, 248, 0.85) 80%, rgba(134, 168, 255, 0.6) 88%, transparent 100%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -1529,9 +1533,9 @@ html[lang="ar"] .marquee__label {
 
 .scanner__badge {
   padding: 4px 10px;
-  border: 1px solid rgba(63, 216, 245, 0.25);
+  border: 1px solid rgba(47, 190, 248, 0.25);
   border-radius: 999px;
-  background: rgba(63, 216, 245, 0.1);
+  background: rgba(47, 190, 248, 0.1);
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -1645,7 +1649,7 @@ html[lang="ar"] .scanner__badge {
 
 .scan-item.is-scanning .scan-item__icon {
   color: var(--cyan-300);
-  border-color: rgba(63, 216, 245, 0.35);
+  border-color: rgba(47, 190, 248, 0.35);
 }
 
 .scan-item.is-done .scan-item__icon {
@@ -1663,7 +1667,7 @@ html[lang="ar"] .scanner__badge {
   inset-inline: 0;
   top: 0;
   height: 28%;
-  background: linear-gradient(180deg, transparent, rgba(63, 216, 245, 0.07) 80%, rgba(63, 216, 245, 0.45));
+  background: linear-gradient(180deg, transparent, rgba(47, 190, 248, 0.07) 80%, rgba(47, 190, 248, 0.45));
   pointer-events: none;
   animation: te-beam 3.4s ease-in-out infinite;
 }
@@ -1686,7 +1690,7 @@ html[lang="ar"] .scanner__badge {
   padding: 14px 16px;
   border: 1px solid rgba(110, 150, 255, 0.22);
   border-radius: 12px;
-  background: linear-gradient(90deg, rgba(74, 120, 255, 0.14), rgba(63, 216, 245, 0.08));
+  background: linear-gradient(90deg, rgba(74, 120, 255, 0.14), rgba(47, 190, 248, 0.08));
   font-size: 0.875rem;
   font-weight: 600;
   opacity: 0.45;
@@ -1797,7 +1801,7 @@ html[lang="ar"] .scanner__badge {
   width: 34px;
   height: 34px;
   border-radius: 10px;
-  background: rgba(63, 216, 245, 0.08);
+  background: rgba(47, 190, 248, 0.08);
   color: var(--cyan-300);
 }
 
@@ -1830,18 +1834,16 @@ html[lang="ar"] .scanner__badge {
   background: linear-gradient(180deg, transparent 30%, rgba(4, 6, 14, 0.85) 85%);
 }
 
-.mission-card__emblem {
+.mission-card__mark {
   position: absolute;
   z-index: -2;
-  top: -12%;
-  inset-inline-end: -18%;
-  width: 92%;
+  top: -4%;
+  inset-inline-end: -8%;
+  width: 68%;
   height: auto;
-  aspect-ratio: 1;
-  fill: url(#g-emblem);
-  opacity: 0.34;
-  filter: drop-shadow(0 0 30px rgba(74, 120, 255, 0.45));
-  animation: te-spin 140s linear infinite;
+  aspect-ratio: 488 / 505;
+  opacity: 0.3;
+  filter: drop-shadow(0 0 40px rgba(1, 101, 249, 0.5));
 }
 
 .mission-card__tag {
@@ -1883,9 +1885,8 @@ html[lang="ar"] .mission-card__quote {
 }
 
 .mission-card__mini {
-  width: 26px;
+  width: 25px;
   height: 26px;
-  fill: url(#g-emblem);
 }
 
 @media (max-width: 960px) {
@@ -2023,7 +2024,7 @@ html[lang="ar"] .tags li {
   gap: 32px;
   border-color: rgba(110, 150, 255, 0.3);
   background:
-    radial-gradient(70% 90% at 100% 0%, rgba(63, 216, 245, 0.12), transparent 60%),
+    radial-gradient(70% 90% at 100% 0%, rgba(47, 190, 248, 0.12), transparent 60%),
     radial-gradient(90% 90% at 0% 100%, rgba(47, 91, 240, 0.2), transparent 60%),
     linear-gradient(180deg, #0d1535, #090e22);
 }
@@ -2095,7 +2096,7 @@ html[lang="ar"] .tags li {
   border: 1px solid rgba(139, 233, 251, 0.35);
   border-radius: 28%;
   background: radial-gradient(circle at 30% 25%, #1a2d6b, #0a1130 70%);
-  box-shadow: 0 0 60px rgba(63, 216, 245, 0.28), 0 0 0 10px rgba(74, 120, 255, 0.06);
+  box-shadow: 0 0 60px rgba(47, 190, 248, 0.28), 0 0 0 10px rgba(74, 120, 255, 0.06);
   color: var(--cyan-300);
 }
 
@@ -2109,7 +2110,7 @@ html[lang="ar"] .tags li {
   justify-content: space-between;
   border-style: dashed;
   border-color: rgba(110, 150, 255, 0.3);
-  background: radial-gradient(90% 80% at 50% 0%, rgba(63, 216, 245, 0.1), transparent 70%), rgba(255, 255, 255, 0.015);
+  background: radial-gradient(90% 80% at 50% 0%, rgba(47, 190, 248, 0.1), transparent 70%), rgba(255, 255, 255, 0.015);
 }
 
 @media (max-width: 1080px) {
@@ -2254,7 +2255,7 @@ html[lang="ar"] .tags li {
   top: 28px;
   inset-inline: 12.5%;
   height: 1px;
-  background: linear-gradient(90deg, rgba(110, 150, 255, 0.1), rgba(110, 150, 255, 0.55), rgba(63, 216, 245, 0.55), rgba(63, 216, 245, 0.1));
+  background: linear-gradient(90deg, rgba(110, 150, 255, 0.1), rgba(110, 150, 255, 0.55), rgba(47, 190, 248, 0.55), rgba(47, 190, 248, 0.1));
 }
 
 .step {
@@ -2303,7 +2304,7 @@ html[lang="ar"] .tags li {
     inset-inline: 27.5px auto;
     width: 1px;
     height: auto;
-    background: linear-gradient(180deg, rgba(110, 150, 255, 0.55), rgba(63, 216, 245, 0.55));
+    background: linear-gradient(180deg, rgba(110, 150, 255, 0.55), rgba(47, 190, 248, 0.55));
   }
 
   .step {
@@ -2345,24 +2346,22 @@ html[lang="ar"] .tags li {
   border-radius: var(--radius-xl);
   background:
     radial-gradient(70% 110% at 50% 0%, rgba(47, 91, 240, 0.5), transparent 62%),
-    radial-gradient(50% 60% at 50% 110%, rgba(63, 216, 245, 0.16), transparent 70%),
+    radial-gradient(50% 60% at 50% 110%, rgba(47, 190, 248, 0.16), transparent 70%),
     linear-gradient(180deg, #0c1636, #060a18);
   text-align: center;
   overflow: hidden;
 }
 
-.cta-band__emblem {
+.cta-band__mark {
   position: absolute;
   z-index: -1;
   top: 50%;
   left: 50%;
-  width: min(760px, 150%);
+  width: min(560px, 110%);
   height: auto;
-  aspect-ratio: 1;
+  aspect-ratio: 488 / 505;
   translate: -50% -50%;
-  fill: url(#g-emblem);
-  opacity: 0.13;
-  animation: te-spin 160s linear infinite;
+  opacity: 0.1;
 }
 
 .cta-band .h2 {
@@ -2587,6 +2586,17 @@ a.contact-item:hover {
   gap: 40px;
 }
 
+.footer__logo {
+  display: inline-block;
+  border-radius: 12px;
+}
+
+.footer__logo svg {
+  width: 150px;
+  height: auto;
+  aspect-ratio: 697 / 765;
+}
+
 .footer__brand p {
   max-width: 340px;
   margin-top: 20px;
@@ -2731,12 +2741,12 @@ html[lang="ar"] .footer__col h3 {
   background: radial-gradient(closest-side, rgba(47, 91, 240, 0.35), rgba(47, 91, 240, 0.08) 55%, transparent 72%);
 }
 
-.page-center__emblem {
-  width: 112px;
-  height: 112px;
+.page-center__mark {
+  width: 108px;
+  height: auto;
   margin: 0 auto 32px;
-  filter: drop-shadow(0 0 24px rgba(74, 120, 255, 0.5));
-  animation: te-spin 60s linear infinite;
+  filter: drop-shadow(0 0 24px rgba(1, 101, 249, 0.5));
+  animation: te-hover 7s ease-in-out infinite;
 }
 
 .page-center h1 {
